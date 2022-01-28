@@ -1,1 +1,1 @@
-# AutoWhats
+# Instagram Bot
