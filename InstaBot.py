@@ -1,12 +1,11 @@
-import maskpass
 from instabot import Bot
-
+from getpass import getpass
 
 
 bot = Bot()
 
 user_name=input("Please, enter your instagram username: ")
-passwd=maskpass.advpass("Please, enter your instagram account password: ")
+passwd=getpass("Please, enter your instagram account password: ")
 
 bot.login(username=user_name, password=passwd)
 
@@ -15,7 +14,7 @@ bot.login(username=user_name, password=passwd)
 option = input("Would you like to upload a photo? [Y/N] ")
 
 if (option == 'Y' or option == 'y' or option == 'Yes' or option == 'YES' or option == 'yes'):
-    photo = input("Insert the full path of you image: ") 
+    photo = input("Insert the full path of you image: ")
     user_caption = input("Add a caption for your post: (Leave blank if no caption is needed)")
     bot.upload_photo(photo, caption=user_caption)
 
@@ -48,17 +47,13 @@ option_4= input("Would you like to know how many followers an account has? [Y/N]
 if (option_4 == 'Y' or option_4 == 'y' or option_4 == 'Yes' or option_4 == 'YES' or option_4 == 'yes'):
     account_followers = input("Enter the username (without the @) of the person you wish to follow: ")
     followers = bot.get_user_followers(account_followers)
+    followers_num = int(len(followers))
     for follower in followers:
-        print(bot.get_user_info(follower))
-#    followers_num = int(len(followers))
-#    for follower in followers:
-#        with open('followers.txt', 'w') as f:
-#            f.write(follower)
-#option_5 = input("Would you like to know who follows ", account_followers, "? [Y/N]")
-#if option_5 == 'Y':
-#    with open('followers.txt', 'r') as f:
-#        lines = f.readlines()
-#        for i in lines:
-#            print(i)
-#
-
+        with open('followers.txt', 'w') as f:
+            f.write(follower)
+    option_5 = input("Would you like to know who follows ", account_followers, "? [Y/N]")
+    if option_5 == 'Y':
+        with open('followers.txt', 'r') as f:
+            lines = f.readlines()
+            for i in lines:
+                print(i)
